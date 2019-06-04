@@ -1,0 +1,31 @@
+{#
+    This file render the question comment part
+#}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      {% if allowUpdate %}<label for="{{ commentId }}">{% endif %}
+      {{ attribute(lang, 'Comments on this question.') }}
+      {% if allowUpdate %}</label>{% endif %}
+      {% if (not allowUpdate ) %}
+        <label for="{{ deleteId }}" title="{{ C.Html.encode(attribute(lang, 'This delete comment')) }}" data-toggle="tooltip" class="small pull-right">
+          {{ C.Html.checkBox(deleteName,false,({
+                  'class' : ''
+              }))
+          }}
+          {{ attribute(lang, 'Set as read.') }}
+        </label>
+      {% endif %}
+    </div>
+  </div>
+  <div class="panel-body">
+      {% if allowUpdate %} 
+        {{ C.Html.textArea(commentName,currentComment.comment,({
+                'class' : 'form-control'
+            }))
+        }}
+      {% else %}
+        <pre class='form-control'>{{ C.Html.encode(currentComment.comment) }}</pre>
+      {% endif %}
+  </div>
+</div>
